@@ -6,7 +6,8 @@ from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor 
 
-from parameters import param, owm
+# secrets
+from parameters import token, owm_key
 
 # коллекция с эмодзи
 code_to_smile = {
@@ -20,7 +21,7 @@ code_to_smile = {
 }
 
 
-bot = Bot(token=param)
+bot = Bot(token=token)
 dp = Dispatcher(bot)
 @dp.message_handler(commands=["start"])
 async def start_command(message: types.Message):
@@ -33,7 +34,7 @@ async def get_weather(message: types.Message):
         city_name = message["text"]
 
         response = requests.get(
-        f"http://api.openweathermap.org/data/2.5/weather?q={city_name}&lang=ru&units=metric&appid={owm}"
+        f"http://api.openweathermap.org/data/2.5/weather?q={city_name}&lang=ru&units=metric&appid={owm_key}"
         )
         data = response.json()
 		
